@@ -60,6 +60,8 @@ namespace Treehouse.FitnessFrog.Controllers
             {
                 _entriesRepository.AddEntry(entry);
 
+                TempData["Message"] = "Your entry was successfully added!";
+
                 return RedirectToAction("Index");
             }
 
@@ -96,6 +98,8 @@ namespace Treehouse.FitnessFrog.Controllers
             {
                 _entriesRepository.UpdateEntry(entry);
 
+                TempData["Message"] = "Your entry was successfully updated!";
+
                 return RedirectToAction("Index");
             }
 
@@ -113,10 +117,11 @@ namespace Treehouse.FitnessFrog.Controllers
 
             Entry entry = _entriesRepository.GetEntry((int)id);
 
-            if(entry == null)
+            if (entry == null)
             {
                 return HttpNotFound();
             }
+
             return View(entry);
         }
 
@@ -124,6 +129,9 @@ namespace Treehouse.FitnessFrog.Controllers
         public ActionResult Delete(int id)
         {
             _entriesRepository.DeleteEntry(id);
+
+            TempData["Message"] = "Your entry was successfully deleted!";
+
             return RedirectToAction("Index");
         }
 
